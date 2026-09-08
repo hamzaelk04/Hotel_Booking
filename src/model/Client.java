@@ -4,9 +4,11 @@ public class Client extends User{
     private String name;
     private String numberPhone;
 
-    public Client (String email, String password) {
-        super(email, password, false
-        );
+    public Client (String name, String email,String numberPhone, String password) {
+        super(email, password, false);
+
+        this.name = name;
+        this.numberPhone = numberPhone;
     }
 
     public String getName() {
