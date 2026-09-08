@@ -2,20 +2,31 @@ package model;
 
 public class Client extends User{
     private String name;
-    private String numberPhone;
+    private String phoneNumber;
 
-    public Client (String name, String email,String numberPhone, String password) {
+    public Client (String name, String email,String phoneNumber, String password) {
         super(email, password, false);
 
         this.name = name;
-        this.numberPhone = numberPhone;
+        this.phoneNumber = phoneNumber;
     }
 
     public String getName() {
         return name;
     }
 
-    public String getNumberPhone() {
-        return numberPhone;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
+
+    @Override
+    public String toString() {
+        return "Client{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                '}';
+    }
+
 }

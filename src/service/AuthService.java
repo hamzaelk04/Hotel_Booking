@@ -12,12 +12,12 @@ public class AuthService {
         this.userRepository = userRepository;
     }
 
-    public void register(String name, String email, String password, String numberPhone) throws EmailAlreadyExistsException {
-        validateRegister(name, email, password, numberPhone);
+    public void register(Client client) throws EmailAlreadyExistsException {
+        if (userRepository.existsByEmail(client.getEmail())) {
+            throw new EmailAlreadyExistsException();
+        }
 
-        Client client = new Client(name, email, numberPhone, password);
         userRepository.save(client);
-
     }
 
     public void login() {
@@ -33,41 +33,5 @@ public class AuthService {
     }
 
     public void updatePassword() {
-    }
-
-    public void validateRegister(String name, String email, String password, String numberPhone) throws EmailAlreadyExistsException {
-        if (name == null || name.isBlank()) {
-            throw new IllegalArgumentException("The name is obligatory!");
-        }
-
-        if (email == null || email.isBlank()) {
-            throw new IllegalArgumentException("The email is obligatory!");
-        }
-
-        if (!email.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$")) {
-            throw new IllegalArgumentException("You should enter a valid email!");
-        }
-
-        if (password == null || password.isBlank()) {
-            throw new IllegalArgumentException("Enter a valid email!");
-        }
-
-        if (password.length() < 6) {
-            throw new IllegalArgumentException("Password must contain at least 6 characters.");
-        }
-
-        if (userRepository.existsByEmail(email)) {
-            throw new EmailAlreadyExistsException();
-        }
-
-        if (numberPhone == null || numberPhone.isBlank()) {
-            throw new IllegalArgumentException("Phone number is required.");
-        }
-
-        if (!numberPhone.matches("\\d{10}")) {
-            throw new IllegalArgumentException(
-                    "Phone number must contain exactly 10 digits."
-            );
-        }
     }
 }
