@@ -20,7 +20,8 @@ public class AuthService {
         userRepository.save(client);
     }
 
-    public void login() {
+    public void login(String email, String password) {
+
     }
 
     public void logout() {

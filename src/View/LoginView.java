@@ -1,14 +1,14 @@
 package View;
 
-import exception.EmailAlreadyExistsException;
 import model.Client;
 import repository.UserRepository;
 import repository.impl.InMemoryUserRepository;
 import service.AuthService;
 
+import java.util.Optional;
 import java.util.Scanner;
 
-public class RegisterView {
+public class LoginView {
     private static final UserRepository userRepository =
             new InMemoryUserRepository();
 
@@ -19,21 +19,12 @@ public class RegisterView {
         return userRepository;
     }
 
-    public static void registerMenu() {
+    public static void loginMenu() {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("========================\n");
         System.out.println("     HOTEL BOOKING   \n");
         System.out.println("========================\n");
-
-        System.out.println("Enter the name: ");
-        System.out.println("========================\n");
-        String name = scanner.nextLine();
-
-        while (name == null || name.isBlank()) {
-            System.out.println("Enter a valid name: ");
-            name = scanner.nextLine();
-        }
 
         System.out.println("Enter the email: ");
         System.out.println("========================\n");
@@ -43,32 +34,37 @@ public class RegisterView {
             System.out.println("Enter a valid email: ");
             email = scanner.nextLine();
         }
-
-        System.out.println("Enter the phone number: ");
-        System.out.println("========================\n");
-        String phoneNumber = scanner.nextLine();
-
-        while (!phoneNumber.matches("\\d{10}")) {
-            System.out.println("Enter a valid phone number: ");
-            phoneNumber = scanner.nextLine();
-        }
-
+        
         System.out.println("Enter the password: ");
         System.out.println("========================\n");
         String password = scanner.nextLine();
 
         while (password.length() < 6) {
-            System.out.println("Enter a valid password: ");
+            System.out.println("The password at least must have 6 charachters: ");
             password = scanner.nextLine();
         }
 
-        Client client = new Client(name, email, phoneNumber, password);
+        authService.login(email, password);
 
-        try {
-            authService.register(client);
-            System.out.println("Registration successful!");
-        } catch (EmailAlreadyExistsException e) {
-            throw new RuntimeException(e);
-        }
+//
+//        Optional<Client> user = getUserRepository().findByEmail(email);
+//
+//        while (user.isEmpty()) {
+//            System.out.println("This email is not found: ");
+//            email = scanner.nextLine();
+//            user = getUserRepository().findByEmail(email);
+//        }
+//
+//        Client client = user.get();
+//
+//
+//
+//
+//        if (client.getPassword().equals(password)) {
+//            System.out.println("Login successful!");
+//            System.out.println("Welcome, " + client.getName() + "!");
+//        } else {
+//            System.out.println("The info are incorrect!");
+//        }
     }
 }
