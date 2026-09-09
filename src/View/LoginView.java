@@ -2,25 +2,13 @@ package View;
 
 import exception.EmailNotFoundException;
 import exception.InvalidPasswordException;
-import model.User;
-import repository.UserRepository;
-import repository.impl.InMemoryUserRepository;
 import service.AuthService;
 
 import java.util.Scanner;
 
 public class LoginView {
-    private static final UserRepository userRepository =
-            new InMemoryUserRepository();
 
-    private static final AuthService authService =
-            new AuthService(userRepository);
-
-    public static UserRepository getUserRepository() {
-        return userRepository;
-    }
-
-    public static void loginMenu() {
+    public static void loginMenu(AuthService authService) {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("========================\n");
@@ -46,13 +34,13 @@ public class LoginView {
         }
 
         try {
-            User user = authService.login(email, password);
+            authService.login(email, password);
 
-            if (user.getRole().equals("Client")) {
-                ClientView.ClientMenu();
+            if (authService.sessionManagement().equals("Client")) {
+                ClientView.ClientMenu(authService, authService.getCurrentUser());
             }
 
-            if (user.getRole().equals("Admin")) {
+            if (authService.sessionManagement().equals("Admin")) {
 
             }
         } catch (EmailNotFoundException | InvalidPasswordException e) {

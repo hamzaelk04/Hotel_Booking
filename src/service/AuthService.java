@@ -6,6 +6,8 @@ import exception.InvalidPasswordException;
 import model.User;
 import repository.UserRepository;
 
+import java.util.UUID;
+
 public class AuthService {
 
     private UserRepository userRepository;
@@ -20,7 +22,9 @@ public class AuthService {
             throw new EmailAlreadyExistsException();
         }
 
-        userRepository.save(user);
+        currentUser = user;
+
+        userRepository.save(currentUser);
     }
 
     public User login(String email, String password) throws EmailNotFoundException, InvalidPasswordException {
@@ -38,8 +42,12 @@ public class AuthService {
         return user;
     }
 
-    public void logout() {
-        currentUser = null;
+    public void logout(UUID id) {
+        if (currentUser.getId() == id) {
+            currentUser = null;
+        } else {
+            System.out.println("Something wrong!");
+        }
     }
 
     public User getCurrentUser() {
@@ -54,7 +62,7 @@ public class AuthService {
         return currentUser.getRole();
     }
 
-    public void updateProfile() {
+    public void updateProfile(User user) {
     }
 
     public void updatePassword() {

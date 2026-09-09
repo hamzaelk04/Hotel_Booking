@@ -1,9 +1,13 @@
 package View;
 
+import model.User;
+import service.AuthService;
+
 import java.util.Scanner;
 
 public class ClientView {
-    public static void ClientMenu() {
+
+    public static void ClientMenu(AuthService authService, User user) {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("========================\n");
@@ -46,6 +50,8 @@ public class ClientView {
 //                update Password
                 break;
             case 10:
+//                logout
+                authService.logout(user.getId());
                 break;
             case 0:
                 return;

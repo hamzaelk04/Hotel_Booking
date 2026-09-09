@@ -2,24 +2,13 @@ package View;
 
 import exception.EmailAlreadyExistsException;
 import model.User;
-import repository.UserRepository;
-import repository.impl.InMemoryUserRepository;
 import service.AuthService;
 
 import java.util.Scanner;
 
 public class RegisterView {
-    private static final UserRepository userRepository =
-            new InMemoryUserRepository();
 
-    private static final AuthService authService =
-            new AuthService(userRepository);
-
-    public static UserRepository getUserRepository() {
-        return userRepository;
-    }
-
-    public static void registerMenu() {
+    public static void registerMenu(AuthService authService) {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("========================\n");
@@ -67,6 +56,12 @@ public class RegisterView {
         try {
             authService.register(client);
             System.out.println("Registration successful!");
+
+            System.out.println("Press Enter to continue: ");
+            String next = scanner.nextLine();
+            if (next.isEmpty()) {
+                ClientView.ClientMenu(authService, client);
+            }
         } catch (EmailAlreadyExistsException e) {
             System.out.println(e.getMessage());
         }

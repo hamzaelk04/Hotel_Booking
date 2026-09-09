@@ -5,7 +5,7 @@ import service.AuthService;
 import java.util.Scanner;
 
 public class MenuView {
-    public static void displayMenu() {
+    public static void displayMenu(AuthService authService) {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("========================\n");
@@ -21,10 +21,10 @@ public class MenuView {
 
         switch (choice) {
             case 1:
-                RegisterView.registerMenu();
+                RegisterView.registerMenu(authService);
                 break;
             case 2:
-                LoginView.loginMenu();
+                LoginView.loginMenu(authService);
                 break;
             case 0:
                 return;
