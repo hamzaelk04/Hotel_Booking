@@ -1,27 +1,27 @@
 package repository.impl;
 
-import model.Client;
+import model.User;
 import repository.UserRepository;
 import java.util.*;
 
 public class InMemoryUserRepository implements UserRepository {
-    private HashMap<UUID, Client> users = new HashMap<>();
+    private HashMap<UUID, User> users = new HashMap<>();
 
     @Override
-    public void save(Client client) {
-        users.put(client.getId(), client);
+    public void save(User user) {
+        users.put(user.getId(), user);
     }
 
     @Override
-    public Optional<Client> findById(UUID id) {
+    public Optional<User> findById(UUID id) {
         return Optional.ofNullable(users.get(id));
     }
 
     @Override
-    public Optional<Client> findByEmail(String email) {
+    public Optional<User> findByEmail(String email) {
         return users.values()
                 .stream()
-                .filter(client -> client.getEmail().equals(email))
+                .filter(user -> user.getEmail().equals(email))
                 .findFirst();
     }
 
@@ -29,11 +29,11 @@ public class InMemoryUserRepository implements UserRepository {
     public boolean existsByEmail(String email){
         return users.values()
                 .stream()
-                .anyMatch(client -> client.getEmail().equals(email));
+                .anyMatch(user -> user.getEmail().equals(email));
     }
 
     @Override
-    public List<Client> findAll() {
+    public List<User> findAll() {
         return new ArrayList<>(users.values());
     }
 }

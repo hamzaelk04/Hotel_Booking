@@ -1,7 +1,7 @@
 package View;
 
 import exception.EmailAlreadyExistsException;
-import model.Client;
+import model.User;
 import repository.UserRepository;
 import repository.impl.InMemoryUserRepository;
 import service.AuthService;
@@ -62,7 +62,7 @@ public class RegisterView {
             password = scanner.nextLine();
         }
 
-        Client client = new Client(name, email, phoneNumber, password);
+        User client = new User(name, email, phoneNumber, password, "Client");
 
         try {
             authService.register(client);
