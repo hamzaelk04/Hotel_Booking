@@ -50,7 +50,8 @@ public class AuthService {
         return currentUser != null;
     }
 
-    public void sessionManagement() {
+    public String sessionManagement() {
+        return currentUser.getRole();
     }
 
     public void updateProfile() {

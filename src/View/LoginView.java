@@ -1,11 +1,11 @@
 package View;
 
-import model.Client;
+import exception.EmailNotFoundException;
+import exception.InvalidPasswordException;
 import repository.UserRepository;
 import repository.impl.InMemoryUserRepository;
 import service.AuthService;
 
-import java.util.Optional;
 import java.util.Scanner;
 
 public class LoginView {
@@ -44,7 +44,11 @@ public class LoginView {
             password = scanner.nextLine();
         }
 
-//        authService.login(email, password);
+        try {
+            authService.login(email, password);
+        } catch (EmailNotFoundException | InvalidPasswordException e) {
+            System.out.println(e.getMessage());
+        }
 
 //
 //        Optional<Client> user = getUserRepository().findByEmail(email);

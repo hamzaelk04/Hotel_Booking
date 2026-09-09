@@ -24,6 +24,7 @@ public class MenuView {
                 RegisterView.registerMenu();
                 break;
             case 2:
+                LoginView.loginMenu();
                 break;
             case 0:
                 return;
