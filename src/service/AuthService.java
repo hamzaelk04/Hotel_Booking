@@ -1,6 +1,8 @@
 package service;
 
 import exception.EmailAlreadyExistsException;
+import exception.EmailNotFoundException;
+import exception.InvalidPasswordException;
 import model.Client;
 import repository.UserRepository;
 
@@ -20,8 +22,17 @@ public class AuthService {
         userRepository.save(client);
     }
 
-    public void login(String email, String password) {
+    public Client login(String email, String password) throws EmailNotFoundException, InvalidPasswordException {
+        if (!userRepository.existsByEmail(email)) {
+            throw new EmailNotFoundException();
+        }
+        Client user = userRepository.findByEmail(email).orElse(null);
 
+        if (!user.getPassword().equals(password)) {
+            throw new InvalidPasswordException();
+        }
+
+        return user;
     }
 
     public void logout() {

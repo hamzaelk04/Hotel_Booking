@@ -34,7 +34,7 @@ public class LoginView {
             System.out.println("Enter a valid email: ");
             email = scanner.nextLine();
         }
-        
+
         System.out.println("Enter the password: ");
         System.out.println("========================\n");
         String password = scanner.nextLine();
@@ -44,7 +44,7 @@ public class LoginView {
             password = scanner.nextLine();
         }
 
-        authService.login(email, password);
+//        authService.login(email, password);
 
 //
 //        Optional<Client> user = getUserRepository().findByEmail(email);

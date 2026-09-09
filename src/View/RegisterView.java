@@ -68,7 +68,7 @@ public class RegisterView {
             authService.register(client);
             System.out.println("Registration successful!");
         } catch (EmailAlreadyExistsException e) {
-            throw new RuntimeException(e);
+            System.out.println(e.getMessage());
         }
     }
 }

@@ -26,6 +26,7 @@ public class Client extends User{
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
+                ", Admin= '" + isAdmin + '\'' +
                 '}';
     }
 

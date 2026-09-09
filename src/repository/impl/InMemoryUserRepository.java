@@ -2,7 +2,6 @@ package repository.impl;
 
 import model.Client;
 import repository.UserRepository;
-
 import java.util.*;
 
 public class InMemoryUserRepository implements UserRepository {
