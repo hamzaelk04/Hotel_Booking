@@ -2,6 +2,7 @@ package View;
 
 import exception.EmailNotFoundException;
 import exception.InvalidPasswordException;
+import model.User;
 import repository.UserRepository;
 import repository.impl.InMemoryUserRepository;
 import service.AuthService;
@@ -45,30 +46,18 @@ public class LoginView {
         }
 
         try {
-            authService.login(email, password);
+            User user = authService.login(email, password);
+
+            if (user.getRole().equals("Client")) {
+                ClientView.ClientMenu();
+            }
+
+            if (user.getRole().equals("Admin")) {
+
+            }
         } catch (EmailNotFoundException | InvalidPasswordException e) {
             System.out.println(e.getMessage());
         }
 
-//
-//        Optional<Client> user = getUserRepository().findByEmail(email);
-//
-//        while (user.isEmpty()) {
-//            System.out.println("This email is not found: ");
-//            email = scanner.nextLine();
-//            user = getUserRepository().findByEmail(email);
-//        }
-//
-//        Client client = user.get();
-//
-//
-//
-//
-//        if (client.getPassword().equals(password)) {
-//            System.out.println("Login successful!");
-//            System.out.println("Welcome, " + client.getName() + "!");
-//        } else {
-//            System.out.println("The info are incorrect!");
-//        }
     }
 }
