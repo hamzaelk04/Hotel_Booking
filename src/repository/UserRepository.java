@@ -8,7 +8,7 @@ import exception.InvalidCredentialException;
 import model.User;
 
 public interface UserRepository {
-    public void save(User user);
+    void save(User user);
 
     Optional<User> findById(UUID id) throws InvalidCredentialException;
 

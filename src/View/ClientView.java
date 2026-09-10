@@ -57,6 +57,7 @@ public class ClientView {
             case 10:
 //                logout
                 authService.logout(authService.getCurrentUser().getId());
+                MenuView.displayMenu(authService);
                 break;
             case 0:
                 MenuView.displayMenu(authService);
