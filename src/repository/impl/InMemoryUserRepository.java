@@ -1,7 +1,9 @@
 package repository.impl;
 
+import exception.InvalidCredentialException;
 import model.User;
 import repository.UserRepository;
+
 import java.util.*;
 
 public class InMemoryUserRepository implements UserRepository {
@@ -13,8 +15,12 @@ public class InMemoryUserRepository implements UserRepository {
     }
 
     @Override
-    public Optional<User> findById(UUID id) {
-        return Optional.ofNullable(users.get(id));
+    public Optional<User> findById(UUID id) throws InvalidCredentialException{
+        if (Optional.ofNullable(users.get(id)).isEmpty()) {
+            throw new InvalidCredentialException();
+        } else {
+            return Optional.of(users.get(id));
+        }
     }
 
     @Override
@@ -26,7 +32,7 @@ public class InMemoryUserRepository implements UserRepository {
     }
 
     @Override
-    public boolean existsByEmail(String email){
+    public boolean existsByEmail(String email) {
         return users.values()
                 .stream()
                 .anyMatch(user -> user.getEmail().equals(email));
