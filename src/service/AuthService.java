@@ -70,13 +70,22 @@ public class AuthService {
     public void updateProfile(UUID id, String name, String email, String numberPhone) throws InvalidCredentialException {
         User user = userRepository.findById(id).orElseThrow(InvalidCredentialException::new);
 
-        user.setName(name);
-        user.setEmail(email);
-        user.setNumberPhone(numberPhone);
+        if (user.getId().equals(id)) {
+            user.setName(name);
+            user.setEmail(email);
+            user.setNumberPhone(numberPhone);
 
-        userRepository.save(user);
+            userRepository.save(user);
+        }
     }
 
-    public void updatePassword() {
+    public void updatePassword(UUID id, String password) throws InvalidCredentialException {
+        User user = userRepository.findById(id).orElseThrow(InvalidCredentialException::new);
+
+        if (user.getId().equals(id)) {
+            user.setPassword(password);
+        }
+
+        userRepository.save(user);
     }
 }

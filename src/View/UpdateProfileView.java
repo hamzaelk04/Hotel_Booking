@@ -1,7 +1,6 @@
 package View;
 
 import exception.InvalidCredentialException;
-import model.User;
 import service.AuthService;
 
 import java.util.Scanner;

@@ -9,6 +9,7 @@ import java.util.Scanner;
 public class ClientView {
 
     public static void ClientMenu(AuthService authService) throws InvalidCredentialException {
+        if (!authService.isAuthenticated()) return;
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("========================\n");
@@ -48,7 +49,6 @@ public class ClientView {
             case 8:
 //                update profile
                 UpdateProfileView.updateProfileMenu(authService);
-//                authService.updateProfile(authService.getCurrentUser().getId());
                 break;
             case 9:
 //                update Password

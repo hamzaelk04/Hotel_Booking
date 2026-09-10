@@ -66,7 +66,7 @@ public class RegisterView {
         } catch (EmailAlreadyExistsException e) {
             System.out.println(e.getMessage());
         } catch (InvalidCredentialException e) {
-            throw new RuntimeException(e);
+            System.out.println(e);
         }
     }
 }
