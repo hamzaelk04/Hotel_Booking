@@ -44,6 +44,20 @@ public class UpdatePasswordView {
             newPassword = scanner.nextLine();
         }
 
-        authService.updatePassword(authService.getCurrentUser().getId(), newPassword);
+        try {
+            authService.updatePassword(authService.getCurrentUser().getId(), newPassword);
+
+            System.out.println("The password updated successfully");
+
+            System.out.println("========================\n");
+            System.out.println("Press enter to continue");
+            String set = scanner.nextLine();
+
+            if (set.isBlank()) {
+                ClientView.ClientMenu(authService);
+            }
+        } catch (InvalidCredentialException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

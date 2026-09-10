@@ -52,6 +52,7 @@ public class ClientView {
                 break;
             case 9:
 //                update Password
+                UpdatePasswordView.updatePasswordView(authService);
                 break;
             case 10:
 //                logout
