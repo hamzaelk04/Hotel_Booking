@@ -1,6 +1,7 @@
 package View;
 
 import exception.EmailNotFoundException;
+import exception.InvalidCredentialException;
 import exception.InvalidPasswordException;
 import service.AuthService;
 
@@ -37,7 +38,7 @@ public class LoginView {
             authService.login(email, password);
 
             if (authService.sessionManagement().equals("Client")) {
-                ClientView.ClientMenu(authService, authService.getCurrentUser());
+                ClientView.ClientMenu(authService);
             }
 
             if (authService.sessionManagement().equals("Admin")) {
@@ -45,6 +46,8 @@ public class LoginView {
             }
         } catch (EmailNotFoundException | InvalidPasswordException e) {
             System.out.println(e.getMessage());
+        } catch (InvalidCredentialException e) {
+            throw new RuntimeException(e);
         }
 
     }

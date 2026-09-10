@@ -16,10 +16,11 @@ public class InMemoryUserRepository implements UserRepository {
 
     @Override
     public Optional<User> findById(UUID id) throws InvalidCredentialException{
-        if (Optional.ofNullable(users.get(id)).isEmpty()) {
+        Optional<User> user = users.values().stream().filter(u -> u.getId().equals(id)).findFirst();
+        if (user.isEmpty()) {
             throw new InvalidCredentialException();
         } else {
-            return Optional.of(users.get(id));
+            return user;
         }
     }
 

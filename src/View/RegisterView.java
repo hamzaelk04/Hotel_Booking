@@ -1,6 +1,7 @@
 package View;
 
 import exception.EmailAlreadyExistsException;
+import exception.InvalidCredentialException;
 import model.User;
 import service.AuthService;
 
@@ -60,10 +61,12 @@ public class RegisterView {
             System.out.println("Press Enter to continue: ");
             String next = scanner.nextLine();
             if (next.isEmpty()) {
-                ClientView.ClientMenu(authService, client);
+                ClientView.ClientMenu(authService);
             }
         } catch (EmailAlreadyExistsException e) {
             System.out.println(e.getMessage());
+        } catch (InvalidCredentialException e) {
+            throw new RuntimeException(e);
         }
     }
 }

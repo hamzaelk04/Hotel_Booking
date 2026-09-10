@@ -1,5 +1,6 @@
 package View;
 
+import exception.InvalidCredentialException;
 import model.User;
 import service.AuthService;
 
@@ -7,24 +8,25 @@ import java.util.Scanner;
 
 public class ClientView {
 
-    public static void ClientMenu(AuthService authService, User user) {
+    public static void ClientMenu(AuthService authService) throws InvalidCredentialException {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("========================\n");
         System.out.println("     HOTEL BOOKING   \n");
         System.out.println("========================\n");
 
-        System.out.println("1. Search available rooms\n" +
-                "2. View all rooms\n" +
-                "3. Create reservation\n" +
-                "4. My reservations\n" +
-                "5. Reservation details\n" +
-                "6. Update reservation\n" +
-                "7. Cancel reservation\n" +
-                "8. Update profile\n" +
-                "9. Change password\n" +
-                "10. Logout\n" +
-                "0. Exit");
+        System.out.println("""
+                1. Search available rooms
+                2. View all rooms
+                3. Create reservation
+                4. My reservations
+                5. Reservation details
+                6. Update reservation
+                7. Cancel reservation
+                8. Update profile
+                9. Change password
+                10. Logout
+                0. Exit""");
 
         int choice = scanner.nextInt();
 
@@ -45,16 +47,18 @@ public class ClientView {
                 break;
             case 8:
 //                update profile
+                UpdateProfileView.updateProfileMenu(authService);
+//                authService.updateProfile(authService.getCurrentUser().getId());
                 break;
             case 9:
 //                update Password
                 break;
             case 10:
 //                logout
-                authService.logout(user.getId());
+                authService.logout(authService.getCurrentUser().getId());
                 break;
             case 0:
-                return;
+                MenuView.displayMenu(authService);
             default:
                 System.out.println("Invalid choice!");
         }

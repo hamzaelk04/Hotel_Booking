@@ -2,6 +2,7 @@ package service;
 
 import exception.EmailAlreadyExistsException;
 import exception.EmailNotFoundException;
+import exception.InvalidCredentialException;
 import exception.InvalidPasswordException;
 import model.User;
 import repository.UserRepository;
@@ -10,11 +11,15 @@ import java.util.UUID;
 
 public class AuthService {
 
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
     private User currentUser;
 
     public AuthService(UserRepository userRepository) {
         this.userRepository = userRepository;
+    }
+
+    public UserRepository getUserRepository() {
+        return userRepository;
     }
 
     public void register(User user) throws EmailAlreadyExistsException {
@@ -27,7 +32,7 @@ public class AuthService {
         userRepository.save(currentUser);
     }
 
-    public User login(String email, String password) throws EmailNotFoundException, InvalidPasswordException {
+    public UUID login(String email, String password) throws EmailNotFoundException, InvalidPasswordException {
         if (!userRepository.existsByEmail(email)) {
             throw new EmailNotFoundException();
         }
@@ -39,7 +44,7 @@ public class AuthService {
 
         currentUser = user;
 
-        return user;
+        return user.getId();
     }
 
     public void logout(UUID id) {
@@ -62,7 +67,14 @@ public class AuthService {
         return currentUser.getRole();
     }
 
-    public void updateProfile(User user) {
+    public void updateProfile(UUID id, String name, String email, String numberPhone) throws InvalidCredentialException {
+        User user = userRepository.findById(id).orElseThrow(InvalidCredentialException::new);
+
+        user.setName(name);
+        user.setEmail(email);
+        user.setNumberPhone(numberPhone);
+
+        userRepository.save(user);
     }
 
     public void updatePassword() {
