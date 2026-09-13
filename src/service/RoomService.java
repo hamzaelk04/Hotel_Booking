@@ -19,7 +19,9 @@ public class RoomService {
     public List<Room> showAllRooms() {
         return roomRepository.findAll();
     }
+
 //contrôler l'état des chambres
+    
     public void occupyRoom(String roomNumber) throws RoomNotFoundException, RoomUnvailableException {
         Room room = roomRepository.findByRoomNumber(roomNumber).orElseThrow(RoomNotFoundException::new);
 
@@ -28,6 +30,38 @@ public class RoomService {
         }
 
         room.setStatus(RoomStatus.OCCUPIED);
+
+        roomRepository.save(room);
+    }
+
+    public void markAsAvailable(String roomNumber) throws RoomNotFoundException {
+        Room room = roomRepository.findByRoomNumber(roomNumber).orElseThrow(RoomNotFoundException::new);
+
+        room.setStatus(RoomStatus.AVAILABLE);
+
+        roomRepository.save(room);
+    }
+
+    public void markAsReserved(String roomNumber) throws RoomNotFoundException {
+        Room room = roomRepository.findByRoomNumber(roomNumber).orElseThrow(RoomNotFoundException::new);
+
+        room.setStatus(RoomStatus.RESERVED);
+
+        roomRepository.save(room);
+    }
+
+    public void markInMaintenance(String roomNumber) throws RoomNotFoundException {
+        Room room = roomRepository.findByRoomNumber(roomNumber).orElseThrow(RoomNotFoundException::new);
+
+        room.setStatus(RoomStatus.MAINTENANCE);
+
+        roomRepository.save(room);
+    }
+
+    public void markAsOutOfService(String roomNumber) throws RoomNotFoundException {
+        Room room = roomRepository.findByRoomNumber(roomNumber).orElseThrow(RoomNotFoundException::new);
+
+        room.setStatus(RoomStatus.OUT_OF_SERVICE);
 
         roomRepository.save(room);
     }
