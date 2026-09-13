@@ -1,14 +1,16 @@
 package View;
 
+import View.RoomsView.AllRoomsView;
 import exception.InvalidCredentialException;
 import model.User;
 import service.AuthService;
+import service.RoomService;
 
 import java.util.Scanner;
 
 public class ClientView {
 
-    public static void ClientMenu(AuthService authService) throws InvalidCredentialException {
+    public static void ClientMenu(AuthService authService, RoomService roomService) throws InvalidCredentialException {
         if (!authService.isAuthenticated()) return;
         Scanner scanner = new Scanner(System.in);
 
@@ -35,6 +37,7 @@ public class ClientView {
             case 1:
                 break;
             case 2:
+                AllRoomsView.DisplayAllRooms(roomService, authService);
                 break;
             case 3:
                 break;
@@ -57,10 +60,10 @@ public class ClientView {
             case 10:
 //                logout
                 authService.logout(authService.getCurrentUser().getId());
-                MenuView.displayMenu(authService);
+                MenuView.displayMenu(authService, roomService);
                 break;
             case 0:
-                MenuView.displayMenu(authService);
+                MenuView.displayMenu(authService, roomService);
             default:
                 System.out.println("Invalid choice!");
         }

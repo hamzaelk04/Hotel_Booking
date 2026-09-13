@@ -1,11 +1,14 @@
 package View;
 
 import service.AuthService;
+import service.RoomService;
 
 import java.util.Scanner;
 
 public class MenuView {
-    public static void displayMenu(AuthService authService) {
+
+
+    public static void displayMenu(AuthService authService, RoomService roomService) {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("========================\n");
@@ -21,10 +24,10 @@ public class MenuView {
 
         switch (choice) {
             case 1:
-                RegisterView.registerMenu(authService);
+                RegisterView.registerMenu(authService, roomService);
                 break;
             case 2:
-                LoginView.loginMenu(authService);
+                LoginView.loginMenu(authService, roomService);
                 break;
             case 0:
                 return;

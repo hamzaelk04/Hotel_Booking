@@ -4,12 +4,13 @@ import exception.EmailNotFoundException;
 import exception.InvalidCredentialException;
 import exception.InvalidPasswordException;
 import service.AuthService;
+import service.RoomService;
 
 import java.util.Scanner;
 
 public class LoginView {
 
-    public static void loginMenu(AuthService authService) {
+    public static void loginMenu(AuthService authService, RoomService roomService) {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("========================\n");
@@ -38,7 +39,7 @@ public class LoginView {
             authService.login(email, password);
 
             if (authService.sessionManagement().equals("Client")) {
-                ClientView.ClientMenu(authService);
+                ClientView.ClientMenu(authService, roomService);
             }
 
             if (authService.sessionManagement().equals("Admin")) {

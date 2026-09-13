@@ -4,12 +4,13 @@ import exception.EmailAlreadyExistsException;
 import exception.InvalidCredentialException;
 import model.User;
 import service.AuthService;
+import service.RoomService;
 
 import java.util.Scanner;
 
 public class RegisterView {
 
-    public static void registerMenu(AuthService authService) {
+    public static void registerMenu(AuthService authService, RoomService roomService) {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("========================\n");
@@ -61,7 +62,7 @@ public class RegisterView {
             System.out.println("Press Enter to continue: ");
             String next = scanner.nextLine();
             if (next.isEmpty()) {
-                ClientView.ClientMenu(authService);
+                ClientView.ClientMenu(authService, roomService);
             }
         } catch (EmailAlreadyExistsException e) {
             System.out.println(e.getMessage());
