@@ -1,8 +1,7 @@
 package View;
 
-import View.RoomsView.AllRoomsView;
+import View.RoomsView.RoomsView;
 import exception.InvalidCredentialException;
-import model.User;
 import service.AuthService;
 import service.RoomService;
 
@@ -35,9 +34,10 @@ public class ClientView {
 
         switch (choice) {
             case 1:
+                RoomsView.DisplayAvailableRooms(roomService, authService);
                 break;
             case 2:
-                AllRoomsView.DisplayAllRooms(roomService, authService);
+                RoomsView.DisplayAllRooms(roomService, authService);
                 break;
             case 3:
                 break;
