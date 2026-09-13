@@ -2,12 +2,13 @@ package View;
 
 import exception.InvalidCredentialException;
 import service.AuthService;
+import service.RoomService;
 
 import java.util.Scanner;
 import java.util.UUID;
 
 public class UpdatePasswordView {
-    public static void updatePasswordView(AuthService authService) throws InvalidCredentialException {
+    public static void updatePasswordView(AuthService authService, RoomService roomService) throws InvalidCredentialException {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("========================\n");
@@ -30,7 +31,7 @@ public class UpdatePasswordView {
             password = scanner.nextLine();
 
             if (password.isBlank()) {
-                ClientView.ClientMenu(authService);
+                ClientView.ClientMenu(authService, roomService);
                 return;
             }
         }
@@ -54,7 +55,7 @@ public class UpdatePasswordView {
             String set = scanner.nextLine();
 
             if (set.isBlank()) {
-                ClientView.ClientMenu(authService);
+                ClientView.ClientMenu(authService, roomService);
             }
         } catch (InvalidCredentialException e) {
             throw new RuntimeException(e);

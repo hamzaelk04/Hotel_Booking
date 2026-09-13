@@ -10,6 +10,14 @@ public class Room {
     private BigDecimal pricePerNight;
     private RoomStatus status;
 
+    public Room(String roomNumber, RoomType type, int capacity, BigDecimal pricePerNight, RoomStatus status) {
+        this.roomNumber = roomNumber;
+        this.type = type;
+        this.capacity = capacity;
+        this.pricePerNight = pricePerNight;
+        this.status = status;
+    }
+
     public String getRoomNumber() {
         return roomNumber;
     }
@@ -48,5 +56,14 @@ public class Room {
 
     public void setStatus(RoomStatus status) {
         this.status = status;
+    }
+
+    @Override
+    public String toString() {
+        return "Room: " + roomNumber + '\'' +
+                ", type: " + type + '\'' +
+                ", capacity: " + capacity + '\'' +
+                ", price/night: " + pricePerNight + '\'' +
+                ", status: " + status;
     }
 }
