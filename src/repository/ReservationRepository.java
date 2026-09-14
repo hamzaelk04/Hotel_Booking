@@ -14,7 +14,7 @@ public interface ReservationRepository {
 
     Optional<Reservation> findById(UUID id) throws ReservationNotFoundException;
 
-    Optional<Reservation> findByCode(String code);
+    Optional<Reservation> findByCode(String code) throws ReservationNotFoundException;
 
     List<Reservation> findByUserId(UUID userId);
 

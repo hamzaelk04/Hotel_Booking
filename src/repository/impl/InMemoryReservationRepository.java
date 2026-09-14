@@ -32,12 +32,20 @@ public class InMemoryReservationRepository implements ReservationRepository {
         if (reservation.isEmpty()) {
             throw new ReservationNotFoundException();
         }
-        return Optional.empty();
+        return reservation;
     }
 
     @Override
-    public Optional<Reservation> findByCode(String code) {
-        return Optional.empty();
+    public Optional<Reservation> findByCode(String code) throws ReservationNotFoundException{
+        Optional<Reservation> reservation = reservations.values()
+                .stream()
+                .filter(r -> r.getReservationCode().equals(code))
+                .findFirst();
+
+        if (reservation.isEmpty()) {
+            throw new ReservationNotFoundException();
+        }
+        return reservation;
     }
 
     @Override
