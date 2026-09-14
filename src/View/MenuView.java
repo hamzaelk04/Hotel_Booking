@@ -1,5 +1,7 @@
 package View;
 
+import View.AuthView.LoginView;
+import View.AuthView.RegisterView;
 import service.AuthService;
 import service.RoomService;
 

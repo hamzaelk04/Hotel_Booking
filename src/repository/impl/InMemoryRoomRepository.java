@@ -1,8 +1,8 @@
 package repository.impl;
 
 import model.Room;
-import model.RoomStatus;
-import model.RoomType;
+import model.enums.RoomStatus;
+import model.enums.RoomType;
 import repository.RoomRepository;
 
 import java.math.BigDecimal;

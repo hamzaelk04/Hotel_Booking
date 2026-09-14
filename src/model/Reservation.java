@@ -9,6 +9,7 @@ import java.util.UUID;
 public class Reservation {
     private UUID id;
     private String reservationCode;
+    private UUID userId;
     private LocalDate checkIn;
     private LocalDate checkOut;
     private int numberOfGuests;
@@ -20,6 +21,7 @@ public class Reservation {
     public Reservation(
             UUID id,
             String reservationCode,
+            UUID userId,
             LocalDate checkIn,
             LocalDate checkOut,
             int numberOfGuests,
@@ -30,6 +32,7 @@ public class Reservation {
     ) {
         this.id = id;
         this.reservationCode = reservationCode;
+        this.userId = userId;
         this.checkIn = checkIn;
         this.checkOut = checkOut;
         this.numberOfGuests = numberOfGuests;
@@ -53,6 +56,14 @@ public class Reservation {
 
     public void setReservationCode(String reservationCode) {
         this.reservationCode = reservationCode;
+    }
+
+    public UUID getUserId() {
+        return userId;
+    }
+
+    public void setUserId(UUID userId) {
+        this.userId = userId;
     }
 
     public LocalDate getCheckIn() {

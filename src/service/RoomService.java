@@ -3,7 +3,7 @@ package service;
 import exception.RoomNotFoundException;
 import exception.RoomUnvailableException;
 import model.Room;
-import model.RoomStatus;
+import model.enums.RoomStatus;
 import repository.RoomRepository;
 
 import java.util.List;

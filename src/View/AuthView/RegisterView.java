@@ -1,5 +1,6 @@
-package View;
+package View.AuthView;
 
+import View.ClientView;
 import exception.EmailAlreadyExistsException;
 import exception.InvalidCredentialException;
 import model.User;

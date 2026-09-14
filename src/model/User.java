@@ -1,5 +1,7 @@
 package model;
 
+import model.enums.UserRole;
+
 import java.util.UUID;
 
 public class User {
@@ -8,9 +10,9 @@ public class User {
     protected String email;
     private String numberPhone;
     protected String password;
-    protected String role;
+    protected UserRole role;
 
-    public User(String name, String email,String numberPhone, String password, String role) {
+    public User(String name, String email,String numberPhone, String password, UserRole role) {
         this.name = name;
         this.email = email;
         this.numberPhone = numberPhone;
@@ -54,9 +56,9 @@ public class User {
         this.password = password;
     }
 
-    public String getRole() { return role; }
+    public UserRole getRole() { return role; }
 
-    public void setRole(String role) {
+    public void setRole(UserRole role) {
         this.role = role;
     }
 

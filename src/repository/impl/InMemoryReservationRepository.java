@@ -1,5 +1,6 @@
 package repository.impl;
 
+import exception.ReservationNotFoundException;
 import model.Reservation;
 import repository.ReservationRepository;
 
@@ -12,12 +13,25 @@ public class InMemoryReservationRepository implements ReservationRepository {
     private HashMap<UUID, Reservation> reservations;
 
     @Override
-    public void save(Reservation reservation) {
+    public void save(UUID id, Reservation reservation) {
 
     }
 
     @Override
-    public Optional<Reservation> findById(UUID id) {
+    public void save(Reservation reservation) {
+        reservations.put(reservation.getId(), reservation);
+    }
+
+    @Override
+    public Optional<Reservation> findById(UUID id) throws ReservationNotFoundException{
+        Optional<Reservation> reservation = reservations.values()
+                .stream()
+                .filter(r -> r.getId().equals(id))
+                .findFirst();
+
+        if (reservation.isEmpty()) {
+            throw new ReservationNotFoundException();
+        }
         return Optional.empty();
     }
 

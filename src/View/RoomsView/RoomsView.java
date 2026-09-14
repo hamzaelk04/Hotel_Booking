@@ -3,7 +3,7 @@ package View.RoomsView;
 import View.ClientView;
 import exception.InvalidCredentialException;
 import model.Room;
-import model.RoomStatus;
+import model.enums.RoomStatus;
 import service.AuthService;
 import service.RoomService;
 
@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.Scanner;
 
 public class RoomsView {
-
     public static void DisplayAllRooms(RoomService roomService, AuthService authService) throws InvalidCredentialException {
         Scanner scanner = new Scanner(System.in);
 

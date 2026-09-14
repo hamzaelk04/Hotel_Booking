@@ -5,6 +5,7 @@ import exception.EmailNotFoundException;
 import exception.InvalidCredentialException;
 import exception.InvalidPasswordException;
 import model.User;
+import model.enums.UserRole;
 import repository.UserRepository;
 
 import java.util.UUID;
@@ -63,7 +64,7 @@ public class AuthService {
         return currentUser != null;
     }
 
-    public String sessionManagement() {
+    public UserRole sessionManagement() {
         return currentUser.getRole();
     }
 

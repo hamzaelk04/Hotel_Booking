@@ -1,5 +1,6 @@
-package View;
+package View.AuthView;
 
+import View.ClientView;
 import exception.EmailNotFoundException;
 import exception.InvalidCredentialException;
 import exception.InvalidPasswordException;
