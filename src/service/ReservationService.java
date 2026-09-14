@@ -5,6 +5,8 @@ import model.Reservation;
 import repository.ReservationRepository;
 import repository.impl.InMemoryReservationRepository;
 
+import java.util.List;
+
 public class ReservationService {
     private final ReservationRepository reservationRepository;
 
@@ -23,11 +25,24 @@ public class ReservationService {
         if (!checkAvailability(reservation)) {
             throw new InvalidReservationDateException();
         }
-        
+
         reservationRepository.save(reservation);
     }
 
     public boolean checkAvailability(Reservation reservation) {
+        List<Reservation> reservations = reservationRepository.findAll();
+
+        for (Reservation existing : reservations) {
+            if (reservation.getId() != null && reservation.getId().equals(existing.getId())) continue;
+
+            if (!reservation.getRoomNumber().equals(existing.getRoomNumber())) continue;
+
+            boolean overlap = reservation.getCheckIn().isBefore(existing.getCheckOut())
+                    && reservation.getCheckOut().isAfter(existing.getCheckIn());
+
+            if (overlap) return false;
+        }
+
         return true;
     }
 }
