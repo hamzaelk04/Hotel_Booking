@@ -7,7 +7,7 @@ import repository.UserRepository;
 import java.util.*;
 
 public class InMemoryUserRepository implements UserRepository {
-    private HashMap<UUID, User> users = new HashMap<>();
+    private final HashMap<UUID, User> users = new HashMap<>();
 
     @Override
     public void save(User user) {
