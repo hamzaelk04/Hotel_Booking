@@ -10,11 +10,6 @@ public class InMemoryReservationRepository implements ReservationRepository {
     private HashMap<UUID, Reservation> reservations;
 
     @Override
-    public void save(UUID id, Reservation reservation) {
-
-    }
-
-    @Override
     public void save(Reservation reservation) {
         reservations.put(reservation.getId(), reservation);
     }
@@ -55,7 +50,10 @@ public class InMemoryReservationRepository implements ReservationRepository {
 
     @Override
     public List<Reservation> findByRoomNumber(String roomNumber) {
-        return List.of();
+        return reservations.values()
+                .stream()
+                .filter(r -> r.getRoomNumber().equals(roomNumber))
+                .toList();
     }
 
     @Override

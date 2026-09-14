@@ -8,8 +8,6 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface ReservationRepository {
-    void save(UUID id, Reservation reservation);
-
     void save(Reservation reservation);
 
     Optional<Reservation> findById(UUID id) throws ReservationNotFoundException;

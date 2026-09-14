@@ -10,6 +10,7 @@ public class Reservation {
     private UUID id;
     private String reservationCode;
     private UUID userId;
+    private String roomNumber;
     private LocalDate checkIn;
     private LocalDate checkOut;
     private int numberOfGuests;
@@ -22,6 +23,7 @@ public class Reservation {
             UUID id,
             String reservationCode,
             UUID userId,
+            String roomNumber,
             LocalDate checkIn,
             LocalDate checkOut,
             int numberOfGuests,
@@ -33,6 +35,7 @@ public class Reservation {
         this.id = id;
         this.reservationCode = reservationCode;
         this.userId = userId;
+        this.roomNumber = roomNumber;
         this.checkIn = checkIn;
         this.checkOut = checkOut;
         this.numberOfGuests = numberOfGuests;
@@ -64,6 +67,14 @@ public class Reservation {
 
     public void setUserId(UUID userId) {
         this.userId = userId;
+    }
+
+    public String getRoomNumber() {
+        return roomNumber;
+    }
+
+    public void setRoomNumber(String roomNumber) {
+        this.roomNumber = roomNumber;
     }
 
     public LocalDate getCheckIn() {
