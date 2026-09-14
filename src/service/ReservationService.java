@@ -5,6 +5,9 @@ import model.Reservation;
 import repository.ReservationRepository;
 import repository.impl.InMemoryReservationRepository;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 public class ReservationService {
@@ -42,8 +45,13 @@ public class ReservationService {
 
         return true;
     }
-    
-    public long numberOfNights(Reservation reservation) {
-        return reservation.getNumberOfNights();
+
+    public long numberOfNights(LocalDate checkIn, LocalDate checkOut) {
+        return ChronoUnit.DAYS.between(checkIn, checkOut);
+    }
+
+    public BigDecimal totalPrice(BigDecimal PricePerNight, LocalDate checkIn, LocalDate checkOut) {
+
+        return PricePerNight.multiply(BigDecimal.valueOf(numberOfNights(checkIn, checkOut)));
     }
 }
