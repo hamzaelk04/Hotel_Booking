@@ -3,6 +3,7 @@ package View;
 import exception.EmailAlreadyExistsException;
 import exception.InvalidCredentialException;
 import model.User;
+import model.enums.UserRole;
 import service.AuthService;
 import service.RoomService;
 
@@ -53,7 +54,7 @@ public class RegisterView {
             password = scanner.nextLine();
         }
 
-        User client = new User(name, email, phoneNumber, password, "Client");
+        User client = new User(name, email, phoneNumber, password, UserRole.CLIENT);
 
         try {
             authService.register(client);

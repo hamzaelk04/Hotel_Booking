@@ -3,6 +3,7 @@ package View;
 import exception.EmailNotFoundException;
 import exception.InvalidCredentialException;
 import exception.InvalidPasswordException;
+import model.enums.UserRole;
 import service.AuthService;
 import service.RoomService;
 
@@ -38,11 +39,11 @@ public class LoginView {
         try {
             authService.login(email, password);
 
-            if (authService.sessionManagement().equals("Client")) {
+            if (authService.sessionManagement().equals(UserRole.CLIENT)) {
                 ClientView.ClientMenu(authService, roomService);
             }
 
-            if (authService.sessionManagement().equals("Admin")) {
+            if (authService.sessionManagement().equals(UserRole.ADMIN)) {
 
             }
         } catch (EmailNotFoundException | InvalidPasswordException e) {
