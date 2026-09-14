@@ -13,7 +13,9 @@ import repository.RoomRepository;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class ReservationService {
     private final ReservationRepository reservationRepository;
@@ -91,7 +93,6 @@ public class ReservationService {
         reservationRepository.save(reservation);
     }
 
-//annuler une réservation
     public void cancelReservation(Reservation reservation) {
         if (reservation.getStatus().equals(ReservationStatus.COMPLETED)) throw new CancelReservationException();
         if (reservation.getStatus().equals(ReservationStatus.CANCELLED)) throw new CancelReservationException();
@@ -99,6 +100,11 @@ public class ReservationService {
         reservation.setStatus(ReservationStatus.CANCELLED);
     }
 
-//consulter les réservations du client
-    
+    public List<Reservation> showReservations(UUID id) {
+
+        return reservationRepository.findAll()
+                .stream()
+                .filter(r -> r.getUserId().equals(id))
+                .toList();
+    }
 }
