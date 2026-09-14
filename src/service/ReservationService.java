@@ -1,10 +1,12 @@
 package service;
 
+import exception.CancelReservationException;
 import exception.InvalidReservationDateException;
 import exception.ReservationNotFoundException;
 import exception.RoomNotFoundException;
 import model.Reservation;
 import model.Room;
+import model.enums.ReservationStatus;
 import repository.ReservationRepository;
 import repository.RoomRepository;
 
@@ -90,5 +92,13 @@ public class ReservationService {
     }
 
 //annuler une réservation
+    public void cancelReservation(Reservation reservation) {
+        if (reservation.getStatus().equals(ReservationStatus.COMPLETED)) throw new CancelReservationException();
+        if (reservation.getStatus().equals(ReservationStatus.CANCELLED)) throw new CancelReservationException();
+
+        reservation.setStatus(ReservationStatus.CANCELLED);
+    }
+
 //consulter les réservations du client
+    
 }
