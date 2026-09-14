@@ -4,10 +4,7 @@ import exception.ReservationNotFoundException;
 import model.Reservation;
 import repository.ReservationRepository;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 public class InMemoryReservationRepository implements ReservationRepository {
     private HashMap<UUID, Reservation> reservations;
@@ -50,7 +47,10 @@ public class InMemoryReservationRepository implements ReservationRepository {
 
     @Override
     public List<Reservation> findByUserId(UUID userId) {
-        return List.of();
+        return reservations.values()
+                .stream()
+                .filter(r -> r.getUserId().equals(userId))
+                .toList();
     }
 
     @Override
@@ -60,6 +60,6 @@ public class InMemoryReservationRepository implements ReservationRepository {
 
     @Override
     public List<Reservation> findAll() {
-        return List.of();
+        return new ArrayList<>(reservations.values());
     }
 }
