@@ -14,9 +14,6 @@ public class ReservationService {
         this.reservationRepository = reservationRepository;
     }
 
-    //créer une réservation
-//vérifier la disponibilité
-//calculer le nombre de nuits
 //calculer le prix total
 //modifier une réservation
 //annuler une réservation
@@ -44,5 +41,9 @@ public class ReservationService {
         }
 
         return true;
+    }
+    
+    public long numberOfNights(Reservation reservation) {
+        return reservation.getNumberOfNights();
     }
 }

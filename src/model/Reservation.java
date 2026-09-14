@@ -4,6 +4,7 @@ import model.enums.ReservationStatus;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.UUID;
 
 public class Reservation {
@@ -27,7 +28,6 @@ public class Reservation {
             LocalDate checkIn,
             LocalDate checkOut,
             int numberOfGuests,
-            long numberOfNights,
             BigDecimal totalPrice,
             ReservationStatus status,
             LocalDate createdAt
@@ -39,7 +39,7 @@ public class Reservation {
         this.checkIn = checkIn;
         this.checkOut = checkOut;
         this.numberOfGuests = numberOfGuests;
-        this.numberOfNights = numberOfNights;
+        this.numberOfNights = ChronoUnit.DAYS.between(checkIn, checkOut);
         this.totalPrice = totalPrice;
         this.status = status;
         this.createdAt = createdAt;
