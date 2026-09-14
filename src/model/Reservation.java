@@ -113,8 +113,8 @@ public class Reservation {
         return totalPrice;
     }
 
-    public void setTotalPrice(BigDecimal totalPrice) {
-        this.totalPrice = totalPrice;
+    public void setTotalPrice(BigDecimal pricePerNight) {
+        this.totalPrice = pricePerNight.multiply(BigDecimal.valueOf(this.numberOfNights));
     }
 
     public ReservationStatus getStatus() {
