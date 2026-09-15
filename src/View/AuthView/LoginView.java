@@ -1,18 +1,17 @@
 package View.AuthView;
 
 import View.ClientView;
-import exception.EmailNotFoundException;
-import exception.InvalidCredentialException;
-import exception.InvalidPasswordException;
+import exception.*;
 import model.enums.UserRole;
 import service.AuthService;
+import service.ReservationService;
 import service.RoomService;
 
 import java.util.Scanner;
 
 public class LoginView {
 
-    public static void loginMenu(AuthService authService, RoomService roomService) {
+    public static void loginMenu(AuthService authService, RoomService roomService, ReservationService reservationService) {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("========================\n");
@@ -41,7 +40,7 @@ public class LoginView {
             authService.login(email, password);
 
             if (authService.sessionManagement().equals(UserRole.CLIENT)) {
-                ClientView.ClientMenu(authService, roomService);
+                ClientView.ClientMenu(authService, roomService, reservationService);
             }
 
             if (authService.sessionManagement().equals(UserRole.ADMIN)) {
@@ -49,7 +48,7 @@ public class LoginView {
             }
         } catch (EmailNotFoundException | InvalidPasswordException e) {
             System.out.println(e.getMessage());
-        } catch (InvalidCredentialException e) {
+        } catch (InvalidCredentialException | RoomNotFoundException | InvalidReservationDateException e) {
             throw new RuntimeException(e);
         }
 

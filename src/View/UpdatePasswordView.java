@@ -1,14 +1,17 @@
 package View;
 
 import exception.InvalidCredentialException;
+import exception.InvalidReservationDateException;
+import exception.RoomNotFoundException;
 import service.AuthService;
+import service.ReservationService;
 import service.RoomService;
 
 import java.util.Scanner;
 import java.util.UUID;
 
 public class UpdatePasswordView {
-    public static void updatePasswordView(AuthService authService, RoomService roomService) throws InvalidCredentialException {
+    public static void updatePasswordView(AuthService authService, RoomService roomService, ReservationService reservationService) throws InvalidCredentialException, RoomNotFoundException, InvalidReservationDateException {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("========================\n");
@@ -31,7 +34,7 @@ public class UpdatePasswordView {
             password = scanner.nextLine();
 
             if (password.isBlank()) {
-                ClientView.ClientMenu(authService, roomService);
+                ClientView.ClientMenu(authService, roomService, reservationService);
                 return;
             }
         }
@@ -55,7 +58,7 @@ public class UpdatePasswordView {
             String set = scanner.nextLine();
 
             if (set.isBlank()) {
-                ClientView.ClientMenu(authService, roomService);
+                ClientView.ClientMenu(authService, roomService, reservationService);
             }
         } catch (InvalidCredentialException e) {
             throw new RuntimeException(e);

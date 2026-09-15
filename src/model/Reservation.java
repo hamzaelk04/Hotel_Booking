@@ -8,7 +8,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.UUID;
 
 public class Reservation {
-    private UUID id;
+    private UUID id = UUID.randomUUID();;
     private String reservationCode;
     private UUID userId;
     private String roomNumber;
@@ -18,22 +18,18 @@ public class Reservation {
     private long numberOfNights;
     private BigDecimal totalPrice;
     private ReservationStatus status;
-    private LocalDate createdAt;
+    private LocalDate createdAt = LocalDate.now();
 
     public Reservation(
-            UUID id,
-            String reservationCode,
             UUID userId,
             String roomNumber,
             LocalDate checkIn,
             LocalDate checkOut,
             int numberOfGuests,
             BigDecimal totalPrice,
-            ReservationStatus status,
-            LocalDate createdAt
+            ReservationStatus status
     ) {
-        this.id = id;
-        this.reservationCode = reservationCode;
+        this.reservationCode = "RES-" + this.id;
         this.userId = userId;
         this.roomNumber = roomNumber;
         this.checkIn = checkIn;
@@ -42,7 +38,6 @@ public class Reservation {
         this.numberOfNights = ChronoUnit.DAYS.between(checkIn, checkOut);
         this.totalPrice = totalPrice;
         this.status = status;
-        this.createdAt = createdAt;
     }
 
     public UUID getId() {

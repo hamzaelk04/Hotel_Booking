@@ -2,16 +2,19 @@ package View.RoomsView;
 
 import View.ClientView;
 import exception.InvalidCredentialException;
+import exception.InvalidReservationDateException;
+import exception.RoomNotFoundException;
 import model.Room;
 import model.enums.RoomStatus;
 import service.AuthService;
+import service.ReservationService;
 import service.RoomService;
 
 import java.util.List;
 import java.util.Scanner;
 
 public class RoomsView {
-    public static void DisplayAllRooms(RoomService roomService, AuthService authService) throws InvalidCredentialException {
+    public static void DisplayAllRooms(RoomService roomService, AuthService authService, ReservationService reservationService) throws InvalidCredentialException, RoomNotFoundException, InvalidReservationDateException {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("========================\n");
@@ -29,11 +32,11 @@ public class RoomsView {
         String choice = scanner.nextLine();
 
         if (choice.isBlank() && authService.isAuthenticated()) {
-            ClientView.ClientMenu(authService, roomService);
+            ClientView.ClientMenu(authService, roomService, reservationService);
         }
     }
 
-    public static void DisplayAvailableRooms(RoomService roomService, AuthService authService) throws InvalidCredentialException {
+    public static void DisplayAvailableRooms(RoomService roomService, AuthService authService, ReservationService reservationService) throws InvalidCredentialException, RoomNotFoundException, InvalidReservationDateException {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("========================\n");
@@ -53,7 +56,7 @@ public class RoomsView {
         String choice = scanner.nextLine();
 
         if (choice.isBlank() && authService.isAuthenticated()) {
-            ClientView.ClientMenu(authService, roomService);
+            ClientView.ClientMenu(authService, roomService, reservationService);
         }
     }
 }

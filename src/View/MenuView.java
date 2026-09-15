@@ -3,6 +3,7 @@ package View;
 import View.AuthView.LoginView;
 import View.AuthView.RegisterView;
 import service.AuthService;
+import service.ReservationService;
 import service.RoomService;
 
 import java.util.Scanner;
@@ -10,7 +11,7 @@ import java.util.Scanner;
 public class MenuView {
 
 
-    public static void displayMenu(AuthService authService, RoomService roomService) {
+    public static void displayMenu(AuthService authService, RoomService roomService, ReservationService reservationService) {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("========================\n");
@@ -26,10 +27,10 @@ public class MenuView {
 
         switch (choice) {
             case 1:
-                RegisterView.registerMenu(authService, roomService);
+                RegisterView.registerMenu(authService, roomService, reservationService);
                 break;
             case 2:
-                LoginView.loginMenu(authService, roomService);
+                LoginView.loginMenu(authService, roomService, reservationService);
                 break;
             case 0:
                 return;

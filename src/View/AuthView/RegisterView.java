@@ -3,16 +3,19 @@ package View.AuthView;
 import View.ClientView;
 import exception.EmailAlreadyExistsException;
 import exception.InvalidCredentialException;
+import exception.InvalidReservationDateException;
+import exception.RoomNotFoundException;
 import model.User;
 import model.enums.UserRole;
 import service.AuthService;
+import service.ReservationService;
 import service.RoomService;
 
 import java.util.Scanner;
 
 public class RegisterView {
 
-    public static void registerMenu(AuthService authService, RoomService roomService) {
+    public static void registerMenu(AuthService authService, RoomService roomService, ReservationService reservationService) {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("========================\n");
@@ -64,12 +67,12 @@ public class RegisterView {
             System.out.println("Press Enter to continue: ");
             String next = scanner.nextLine();
             if (next.isEmpty()) {
-                ClientView.ClientMenu(authService, roomService);
+                ClientView.ClientMenu(authService, roomService, reservationService);
             }
         } catch (EmailAlreadyExistsException e) {
             System.out.println(e.getMessage());
-        } catch (InvalidCredentialException e) {
-            System.out.println(e);
+        } catch (RoomNotFoundException | InvalidReservationDateException | InvalidCredentialException e) {
+            throw new RuntimeException(e);
         }
     }
 }
