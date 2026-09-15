@@ -48,6 +48,7 @@ public class ClientView {
                 ReservationView.CreateReservation(authService, roomService, reservationService);
                 break;
             case 4:
+                ReservationView.ShowAllReservation(authService, reservationService);
                 break;
             case 5:
                 break;

@@ -55,14 +55,12 @@ public class ReservationView {
         System.out.println("Enter the number of guests: ");
         int numberOfGuests = scanner.nextInt();
 
-        BigDecimal totalPrice = room.getPricePerNight().multiply(BigDecimal.valueOf(ChronoUnit.DAYS.between(checkIn, checkOut)));
-
         Reservation reservation = new Reservation(userId,
                 roomNumber,
                 checkIn,
                 checkOut,
                 numberOfGuests,
-                totalPrice,
+                reservationService.totalPrice(room.getPricePerNight(), checkIn, checkOut),
                 ReservationStatus.CONFIRMED);
 
         reservationService.createReservation(reservation);
@@ -72,5 +70,12 @@ public class ReservationView {
         String input = scanner.nextLine();
 
         if (input.isBlank()) ClientView.ClientMenu(authService, roomService, reservationService);
+    }
+
+    public static void ShowAllReservation(AuthService authService, ReservationService reservationService) {
+        System.out.println(reservationService.
+                showReservations(authService.
+                        getCurrentUser().
+                        getId()));;
     }
 }

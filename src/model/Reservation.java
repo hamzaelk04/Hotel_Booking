@@ -127,4 +127,13 @@ public class Reservation {
     public void setCreatedAt(LocalDate createdAt) {
         this.createdAt = createdAt;
     }
+
+    @Override
+    public String toString() {
+        return "Reservation: " + reservationCode + '\'' +
+                "CheckIn: " + checkIn + '\'' +
+                "Checkout: " + checkOut + '\'' +
+                "Total price: " + totalPrice + '\'' +
+                "Number of days: " + numberOfNights;
+    }
 }
